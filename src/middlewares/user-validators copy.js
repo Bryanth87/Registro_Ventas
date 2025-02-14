@@ -1,6 +1,7 @@
 import { body, param } from "express-validator";
 import { emailExists, usernameExists, userExists } from "../helpers/db-validators.js";
 import { validarCampos } from "./validate-fields.js";
+import { deleteFileOnError } from "./delete-file-on-error.js";
 import { handleErrors } from "./handle-errors.js";
 
 export const registerValidator = [
@@ -52,9 +53,5 @@ export const updateUserValidator = [
     validarCampos,
     handleErrors
 ];
-
-
-
-
 
 

@@ -1,10 +1,5 @@
 import { hash, verify } from "argon2";
 import User from "./user.model.js";
-import fs from "fs/promises";
-import { join, dirname } from "path";
-import { fileURLToPath } from "url";
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export const getUserById = async (req, res) => {
     try {
@@ -110,13 +105,45 @@ export const updatePassword = async (req, res) => {
     }
 };
 
-export const updateUser = async (req, res) => {
+export const updateSelf = async (req, res) => {
     try {
         const { uid } = req.params;
         const data = req.body;
+        const updatedUser = await User.findByIdAndUpdate(uid, data, { new: true });
+        
+        if (req.user.id !== uid) {
+            return res.status(403).json({
+                success: false,
+                msg: 'Acceso denegado. No puedes actualizar la información de otro usuario.'
+            });
+        }
+        res.status(200).json({
+            success: true,
+            msg: 'Información actualizada',
+            user: updatedUser,
+        });
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            msg: 'Error al actualizar la información',
+            error: err.message
+        });
+    }
+};
 
+export const updateUser = async (req, res) => {
+    try {
+
+        const { uid } = req.params;
+        const data = req.body;
         const updatedUser = await User.findByIdAndUpdate(uid, data, { new: true });
 
+        if (req.user.role !== 'ADMIN') {
+            return res.status(403).json({
+                success: false,
+                msg: 'Acceso denegado. Solo los administradores pueden actualizar usuarios.'
+            });
+        }
         res.status(200).json({
             success: true,
             msg: 'Usuario Actualizado',
