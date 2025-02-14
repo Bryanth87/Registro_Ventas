@@ -71,7 +71,7 @@ export const deleteUser = async (req, res) => {
     } catch (err) {
         return res.status(500).json({
             success: false,
-            message: "Error al eliminar el usuario", //Documentación
+            message: "Error al eliminar el usuario",
             error: err.message
         });
     }
