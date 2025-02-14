@@ -7,7 +7,6 @@ export const register = async (req, res) => {
         const data = req.body;
         const encryptedPassword = await hash(data.password)
         data.password = encryptedPassword
-        data.profilePicture = profilePicture
 
         const user = await User.create(data);
 
@@ -24,7 +23,7 @@ export const register = async (req, res) => {
     }
 }
 
-export const login = async (req, res) => {
+export const login = async (req, res) => {cx
     const { email, username, password } = req.body
     try{
         const user = await User.findOne({
