@@ -1,0 +1,18 @@
+import { Schema, model} from "mongoose";
+
+const categorySchema = new mongoose.Schema({
+    name: { 
+      type: String, 
+      required: true 
+    },
+    description: { 
+        type: String,
+        required: true
+    },
+    calidad: {
+        type: String,
+        enum: ["Bueno", "Malo"]
+      }  
+    })
+    
+export default model ("Category", categorySchema)

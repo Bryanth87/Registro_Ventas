@@ -3,10 +3,19 @@ import User from "../user/user.model.js"
 import { generateJWT } from "../helpers/generate-jwt.js";
 
 export const register = async (req, res) => {
-    try {   
+    try {
+
         const data = req.body;
-        const encryptedPassword = await hash(data.password)
-        data.password = encryptedPassword
+        const encryptedPassword = await hash(data.password);
+        
+        if (req.user.role !== 'ADMIN') {
+            return res.status(403).json({
+                success: false,
+                msg: 'Acceso denegado. Solo los administradores pueden registrar nuevos usuarios.'
+            });
+        }
+
+        data.password = encryptedPassword;
 
         const user = await User.create(data);
 
@@ -21,7 +30,7 @@ export const register = async (req, res) => {
             error: err.message
         });
     }
-}
+};
 
 export const login = async (req, res) => {cx
     const { email, username, password } = req.body

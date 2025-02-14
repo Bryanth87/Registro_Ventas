@@ -1,10 +1,5 @@
 import { hash, verify } from "argon2";
 import User from "./user.model.js";
-import fs from "fs/promises";
-import { join, dirname } from "path";
-import { fileURLToPath } from "url";
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export const getUserById = async (req, res) => {
     try {
@@ -105,27 +100,6 @@ export const updatePassword = async (req, res) => {
         return res.status(500).json({
             success: false,
             message: "Error al actualizar contraseña",
-            error: err.message
-        });
-    }
-};
-
-export const updateUser = async (req, res) => {
-    try {
-        const { uid } = req.params;
-        const data = req.body;
-
-        const updatedUser = await User.findByIdAndUpdate(uid, data, { new: true });
-
-        res.status(200).json({
-            success: true,
-            msg: 'Usuario Actualizado',
-            user: updatedUser,
-        });
-    } catch (err) {
-        res.status(500).json({
-            success: false,
-            msg: 'Error al actualizar usuario',
             error: err.message
         });
     }
