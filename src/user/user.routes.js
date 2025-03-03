@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Router } from "express";
 import {
   getUserById,
@@ -26,3 +27,6 @@ router.patch("/updatePassword/:uid", updatePasswordValidator, updatePassword);
 router.put("/updateUser/:uid", updateUserValidator, updateUser);
 
 export default router;
+=======
+import { } from ""
+>>>>>>> e91822b (Controller usuarios creado)

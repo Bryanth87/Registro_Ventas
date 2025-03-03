@@ -1,159 +1,192 @@
-import { hash, verify } from "argon2";
 import User from "./user.model.js";
+import { hash, verify } from "argon2";
 
-export const getUserById = async (req, res) => {
+export const addUser = async (req, res) => {
+    try {
+        const data = req.body;
+        const encryptedPassword = await hash(data.password);
+        data.password = encryptedPassword;
+        const user = await User.create(data);
+
+        return res.status(201).json({
+            message: "Perfil creado",
+            name: user.name,
+            email: user.email,
+        });
+    } catch (err) {
+        return res.status(500).json({
+            message: "Error al crear perfil",
+            error: err.message,
+        });
+    }
+};
+
+export const editAdminUser = async (req, res) => {
     try {
         const { uid } = req.params;
-        const user = await User.findById(uid);
+        const data = req.body;
+        const { usuario } = req;
 
-        if (!user) {
-            return res.status(404).json({
-                success: false,
-                message: "Usuario no encontrado"
+        if (usuario.role !== "ADMIN_ROLE") {
+            return res.status(403).json({
+                message: "No puedes editar perfiles",
             });
         }
 
+        const user = await User.findByIdAndUpdate(uid, data, { new: true });
+
         return res.status(200).json({
-            success: true,
-            user
+            message: "Usuario actualizado",
+            user,
         });
     } catch (err) {
         return res.status(500).json({
-            success: false,
-            message: "Error al obtener el usuario",
-            error: err.message
+            message: "Error al actualizar usuario",
+            error: err.message,
         });
     }
 };
 
-export const getUsers = async (req, res) => {
+export const editProfile = async (req, res) => {
     try {
-        const { limite = 5, desde = 0 } = req.query;
-        const query = { status: true };
+        const { usuario } = req;
+        const data = req.body;
 
-        const [total, users] = await Promise.all([
-            User.countDocuments(query),
-            User.find(query)
-                .skip(Number(desde))
-                .limit(Number(limite))
-        ]);
+        delete data.password;
+        delete data.role;
+        delete data.status;
+
+        const user = await User.findByIdAndUpdate(usuario._id, data, { new: true });
 
         return res.status(200).json({
-            success: true,
-            total,
-            users
+            message: "Perfil actualizado",
+            user,
         });
     } catch (err) {
         return res.status(500).json({
-            success: false,
-            message: "Error al obtener los usuarios",
-            error: err.message
+            message: "Error al actualizar perfil",
+            error: err.message,
         });
     }
 };
 
-export const deleteUser = async (req, res) => {
+export const editRoleAdmin = async (req, res) => {
     try {
         const { uid } = req.params;
+        const { role } = req.body;
+        const { usuario } = req;
+
+        if (usuario.role !== "ADMIN_ROLE") {
+            return res.status(403).json({
+                message: "No tienes permiso para modificar roles",
+            });
+        }
+
+        const user = await User.findByIdAndUpdate(uid, { role }, { new: true });
+
+        return res.status(200).json({
+            message: "User role has been modified",
+            user,
+        });
+    } catch (err) {
+        return res.status(500).json({
+            message: "User role modification failed",
+            error: err.message,
+        });
+    }
+};
+
+export const deleteProfileAdmin = async (req, res) => {
+    try {
+        const { uid } = req.params;
+        const { usuario } = req;
+
+        if (usuario.role !== "ADMIN_ROLE") {
+            return res.status(403).json({
+                message: "No tienes permiso para eliminar usuarios",
+            });
+        }
 
         const user = await User.findByIdAndUpdate(uid, { status: false }, { new: true });
 
         return res.status(200).json({
-            success: true,
-            message: "Usuario eliminado",
-            user
+            message: "User has been deleted",
+            user,
         });
     } catch (err) {
         return res.status(500).json({
-            success: false,
-            message: "Error al eliminar el usuario",
-            error: err.message
+            message: "User deletion failed",
+            error: err.message,
         });
     }
 };
 
-export const updatePassword = async (req, res) => {
+export const editPassword = async (req, res) => {
     try {
-        const { uid } = req.params;
+        const { usuario } = req;
         const { newPassword } = req.body;
 
-        const user = await User.findById(uid);
+        const user = await User.findById(usuario._id);
 
         const matchOldAndNewPassword = await verify(user.password, newPassword);
 
         if (matchOldAndNewPassword) {
             return res.status(400).json({
                 success: false,
-                message: "La nueva contraseña no puede ser igual a la anterior"
+                message: "La contraseña ingreseda no puede ser igual a la anterior",
             });
         }
 
         const encryptedPassword = await hash(newPassword);
 
-        await User.findByIdAndUpdate(uid, { password: encryptedPassword }, { new: true });
+        await User.findByIdAndUpdate(usuario._id, { password: encryptedPassword }, { new: true });
 
         return res.status(200).json({
             success: true,
             message: "Contraseña actualizada",
         });
     } catch (err) {
+        console.log(err);
         return res.status(500).json({
             success: false,
             message: "Error al actualizar contraseña",
-            error: err.message
+            error: err.message,
         });
     }
 };
 
-export const updateSelf = async (req, res) => {
+export const deleteProfileClient = async (req, res) => {
     try {
-        const { uid } = req.params;
-        const data = req.body;
-        const updatedUser = await User.findByIdAndUpdate(uid, data, { new: true });
-        
-        if (req.user.id !== uid) {
-            return res.status(403).json({
+        const { usuario } = req;
+        const { password } = req.body;
+
+        if (!password) {
+            return res.status(400).json({
                 success: false,
-                msg: 'Acceso denegado. No puedes actualizar la información de otro usuario.'
+                message: "Coloca la contraseña",
             });
         }
-        res.status(200).json({
-            success: true,
-            msg: 'Información actualizada',
-            user: updatedUser,
-        });
-    } catch (err) {
-        res.status(500).json({
-            success: false,
-            msg: 'Error al actualizar la información',
-            error: err.message
-        });
-    }
-};
 
-export const updateUser = async (req, res) => {
-    try {
+        const matchPasswords = await verify(usuario.password, password);
 
-        const { uid } = req.params;
-        const data = req.body;
-        const updatedUser = await User.findByIdAndUpdate(uid, data, { new: true });
-
-        if (req.user.role !== 'ADMIN') {
-            return res.status(403).json({
+        if (!matchPasswords) {
+            return res.status(400).json({
                 success: false,
-                msg: 'Acceso denegado. Solo los administradores pueden actualizar usuarios.'
+                message: "Para confirmar ingresa la contraseña",
             });
         }
-        res.status(200).json({
+
+        await User.findByIdAndUpdate(usuario._id, { status: false }, { new: true });
+
+        return res.status(200).json({
             success: true,
-            msg: 'Usuario Actualizado',
-            user: updatedUser,
+            message: "Perfil Eliminado",
         });
     } catch (err) {
-        res.status(500).json({
-            success: false,
-            msg: 'Error al actualizar usuario',
-            error: err.message
+        console.log(err);
+        return res.status(500).json({
+            message: "Error al eliminar perfil",
+            error: err.message,
         });
     }
 };
