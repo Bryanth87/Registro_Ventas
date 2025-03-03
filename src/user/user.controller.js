@@ -51,7 +51,7 @@ export const editAdminUser = async (req, res) => {
     }
 };
 
-export const editProfileClient = async (req, res) => {
+export const editProfile = async (req, res) => {
     try {
         const { usuario } = req;
         const data = req.body;
@@ -63,18 +63,18 @@ export const editProfileClient = async (req, res) => {
         const user = await User.findByIdAndUpdate(usuario._id, data, { new: true });
 
         return res.status(200).json({
-            message: "User has been updated",
+            message: "Perfil actualizado",
             user,
         });
     } catch (err) {
         return res.status(500).json({
-            message: "User update failed",
+            message: "Error al actualizar perfil",
             error: err.message,
         });
     }
 };
 
-export const editRole = async (req, res) => {
+export const editRoleAdmin = async (req, res) => {
     try {
         const { uid } = req.params;
         const { role } = req.body;
@@ -100,7 +100,7 @@ export const editRole = async (req, res) => {
     }
 };
 
-export const deleteProfile = async (req, res) => {
+export const deleteProfileAdmin = async (req, res) => {
     try {
         const { uid } = req.params;
         const { usuario } = req;
@@ -209,7 +209,7 @@ export const deleteProfileClient = async (req, res) => {
         if (!password) {
             return res.status(400).json({
                 success: false,
-                message: "Password is required",
+                message: "Coloca la contraseña",
             });
         }
 
