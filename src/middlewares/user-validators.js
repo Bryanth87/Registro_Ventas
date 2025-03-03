@@ -11,6 +11,7 @@ export const registerValidator = [
     body("email").custom(emailExists),
     body("username").custom(usernameExists),
     body("password").isStrongPassword({
+        minLength: 8
     }),
     validarCampos,
     handleErrors
@@ -52,9 +53,6 @@ export const updateUserValidator = [
     validarCampos,
     handleErrors
 ];
-
-
-
 
 
 
