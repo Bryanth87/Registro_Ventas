@@ -1,6 +1,4 @@
 import User from "./user.model.js";
-<<<<<<< HEAD
-=======
 import { hash, verify } from "argon2";
 
 export const addUser = async (req, res) => {
@@ -8,8 +6,6 @@ export const addUser = async (req, res) => {
         const data = req.body;
         const encryptedPassword = await hash(data.password);
         data.password = encryptedPassword;
->>>>>>> e91822b (Controller usuarios creado)
-
         const user = await User.create(data);
 
         return res.status(201).json({
@@ -159,48 +155,6 @@ export const editPassword = async (req, res) => {
     }
 };
 
-<<<<<<< HEAD
-export const updateSelf = async (req, res) => {
-    try {
-        const { uid } = req.params;
-        const data = req.body;
-        const updatedUser = await User.findByIdAndUpdate(uid, data, { new: true });
-        
-        if (req.user.id !== uid) {
-            return res.status(403).json({
-                success: false,
-                msg: 'Acceso denegado. No puedes actualizar la información de otro usuario.'
-            });
-        }
-        res.status(200).json({
-            success: true,
-            msg: 'Información actualizada',
-            user: updatedUser,
-        });
-    } catch (err) {
-        res.status(500).json({
-            success: false,
-            msg: 'Error al actualizar la información',
-            error: err.message
-        });
-    }
-};
-
-export const updateUser = async (req, res) => {
-    try {
-
-        const { uid } = req.params;
-        const data = req.body;
-        const updatedUser = await User.findByIdAndUpdate(uid, data, { new: true });
-
-        if (req.user.role !== 'ADMIN') {
-            return res.status(403).json({
-                success: false,
-                msg: 'Acceso denegado. Solo los administradores pueden actualizar usuarios.'
-            });
-        }
-        res.status(200).json({
-=======
 export const deleteProfileClient = async (req, res) => {
     try {
         const { usuario } = req;
@@ -225,7 +179,6 @@ export const deleteProfileClient = async (req, res) => {
         await User.findByIdAndUpdate(usuario._id, { status: false }, { new: true });
 
         return res.status(200).json({
->>>>>>> e91822b (Controller usuarios creado)
             success: true,
             message: "Perfil Eliminado",
         });
