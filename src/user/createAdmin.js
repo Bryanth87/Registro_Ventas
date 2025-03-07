@@ -1,4 +1,4 @@
-import User from "./user.model.js";
+import User from "../user/user.model.js";
 import argon2 from "argon2"; 
 
 const createDefaultAdmin = async () => {
@@ -9,7 +9,7 @@ const createDefaultAdmin = async () => {
 
             const defaultAdmin = new User({
                 name: "Bryan",
-                surname: "Bryanth87",
+                username: "Bryanth87",
                 email: "Bryanth87@gmail.com",
                 password: hashedPassword, 
                 role: "ADMIN_ROLE",

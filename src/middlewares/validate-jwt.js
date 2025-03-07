@@ -8,7 +8,7 @@ export const validateJWT = async (req, res, next) => {
         if(!token){
             return res.status(400).json({
                 success: false,
-                message: "No token provided in the request"
+                message: "No existe token en la petición"
             })
         }
 
@@ -21,14 +21,14 @@ export const validateJWT = async (req, res, next) => {
         if(!user){
            return res.status(400).json({
                 success: false,
-                message: "User does not exist in DB"
+                message: "usaurio no existe en la DB"
            }) 
         }
 
         if(user.status === false){
             return res.status(400).json({
                 success: false,
-                message: "User has been deactivated"
+                message: " Usuario desactivado previamente"
             })
         }
 
@@ -37,7 +37,7 @@ export const validateJWT = async (req, res, next) => {
     }catch(err){
         return res.status(500).json({
             success: false,
-            message: "Error validating token",
+            message : "Error al validar el token",
             error: err.message
         })
     }

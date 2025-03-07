@@ -1,7 +1,6 @@
 import { body, param } from "express-validator";
-import { emailExists, usernameExists } from "../helpers/db-validators.js";
+import { emailExists, usernameExists, userExists } from "../helpers/db-validators.js";
 import { validarCampos } from "./validate-fields.js";
-import { deleteFileOnError } from "./delete-file-on-error.js";
 import { handleErrors } from "./handle-errors.js";
 import { validateJWT } from "./validate-jwt.js";
 import { hasRoles } from "./validate-roles.js";
@@ -9,17 +8,16 @@ import { hasRoles } from "./validate-roles.js";
 export const registerValidator = [
     body("name").notEmpty().withMessage("El nombre es requerido"),
     body("username").notEmpty().withMessage("El nombre de usuario es requerido"),
-    body("email").notEmpty().withMessage("El email es requerido"),
-    body("email").isEmail().withMessage("Formato invalido"),
+    body("email").notEmpty().withMessage("Email es requerido"),
+    body("email").isEmail().withMessage("Email invalido"),
     body("email").custom(emailExists),
     body("username").custom(usernameExists),
     body("password")
         .isStrongPassword({
             minLength: 8
-        }).withMessage("La contraseña no debe ser menor de 8 carácteres"),
+        }).withMessage("La contraseña debe de contener 8 carácteres"),
     validarCampos,
-    deleteFileOnError,
-    handleErrors,
+    handleErrors
 ];
 
 export const loginValidator = [
@@ -33,31 +31,27 @@ export const loginValidator = [
 export const addUserValidator = [
     validateJWT,
     hasRoles("ADMIN_ROLE"),
-    body("name").notEmpty().withMessage("Nombre requerido"),
-    body("username").notEmpty().withMessage("Nombre de usuario requerido"),
+    body("name").notEmpty().withMessage("Nonmbre es requerido"),
+    body("username").notEmpty().withMessage("Nombre de usuario es requerido"),
     body("email").notEmpty().withMessage("Email es requerido"),
     body("email").isEmail().withMessage("Email invalido"),
     body("email").custom(emailExists),
     body("username").custom(usernameExists),
-    body("password")
-        .isStrongPassword({
-            minLength: 8,
-        }).withMessage("La contraseña no debe de ser menor de 8 caráacteres"),
+    body("password").isStrongPassword({
+        minLength: 8,
+    }).withMessage("La contrasaña debe de tener 8 carácteres"),
     validarCampos,
-    deleteFileOnError,
-    handleErrors,
+    handleErrors
 ];
 
 export const editAdminUserValidator = [
     validateJWT,
     hasRoles("ADMIN_ROLE"),
-    param("uid").isMongoId().withMessage("ID invalido"),
-    body("name").optional(),
-    body("username").optional(),
-    body("surname").optional(),
-    body("email").optional().isEmail().withMessage("Email invalido"),
+    param("uid").isMongoId().withMessage("No es un ID válido de MongoDB"),
+    param("uid").custom(userExists),
+    body("email").optional().isEmail().withMessage("Correo invalido"),
     validarCampos,
-    handleErrors,
+    handleErrors
 ];
 
 export const editProfileValidator = [
@@ -65,32 +59,38 @@ export const editProfileValidator = [
     hasRoles("CLIENT_ROLE", "ADMIN_ROLE"),
     body("email").optional().isEmail().withMessage("Email invalido"),
     validarCampos,
-    handleErrors,
+    handleErrors
 ];
 
 export const editRoleAdminValidator = [
     validateJWT,
     hasRoles("ADMIN_ROLE"),
-    param("uid").isMongoId().withMessage("ID invalido"),
-    body("role").isIn(["ADMIN_ROLE", "CLIENT_ROLE"]).withMessage("Role invalido"),
+    param("uid").isMongoId().withMessage("No es un ID válido de MongoDB"),
+    param("uid").custom(userExists),
+    body("role").isString().withMessage("Elige el ron").isIn(["ADMIN_ROLE", "CLIENT_ROLE"]).withMessage("Rol no válido"),
     validarCampos,
-    handleErrors,
+    handleErrors
 ];
 
 export const deleteProfileAdminValidator = [
-    validateJWT,
-    hasRoles("ADMIN_ROLE"),
-    param("uid").isMongoId().withMessage("ID invalido"),
+    param("uid").isMongoId().withMessage("No es un ID válido de MongoDB"),
+    param("uid").custom(userExists),
     validarCampos,
-    handleErrors,
+    handleErrors
 ];
 
 export const editPasswordValidator = [
     validateJWT,
     hasRoles("CLIENT_ROLE", "ADMIN_ROLE"),
-    body("newPassword").isLength({ min: 8 }).withMessage("Password must be at least 8 characters long"),
+    body("newPassword").isLength({ min: 8 }).withMessage("La contraseña debe de tener 8 carácteres"),
     validarCampos,
-    handleErrors,
-];
+    handleErrors
+]
 
-
+export const deleteProfileValidator = [
+    validateJWT,
+    hasRoles("CLIENT_ROLE", "ADMIN_ROLE"),
+    body("password").notEmpty().withMessage("La contraseña es requerida"),
+    validarCampos,
+    handleErrors
+]
