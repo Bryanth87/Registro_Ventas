@@ -1,7 +1,7 @@
 # Registro_Ventas
 API de gestión de ventas 
-# Hecho por: Bryanth87
-# email: tgbryan14@gmail.com
+## Hecho por: Bryanth87
+## email: tgbryan14@gmail.com
 
 # Importar proyecto
 
