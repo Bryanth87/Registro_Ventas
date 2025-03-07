@@ -67,9 +67,6 @@ export const editProfile = async (req, res) => {
     try {
         const { usuario } = req;
         const data = req.body;
-        delete data.password;
-        delete data.role;
-        delete data.status;
         
         const user = await User.findByIdAndUpdate(usuario._id,  data, { new: true });
 
