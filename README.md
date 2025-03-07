@@ -37,5 +37,14 @@ API de gestión de ventas
     "password":"Brayan1234"
     
     }
+# Uso de endopoints 
+ - **Uso en postman:**
+** Al momento de ejecutar el proyecto, ir a un navegador web y colocar esta url: "http://localhost:3001/api-docs/"
 
+# Uso de endopoints 
+## 🚀 PRERREQUISITOS 🚀
+
+- *[Git](https://git-scm.com/)*
+- *[Node.js](https://nodejs.org/)*
+- *[npm](https://www.npmjs.com/)*
 
