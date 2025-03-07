@@ -4,21 +4,10 @@ import { generateJWT } from "../helpers/generate-jwt.js";
 
 export const register = async (req, res) => {
     try {
-
         const data = req.body;
         const encryptedPassword = await hash(data.password);
-        
-        if (req.user.role !== 'ADMIN') {
-            return res.status(403).json({
-                success: false,
-                msg: 'Acceso denegado. Solo los administradores pueden registrar nuevos usuarios.'
-            });
-        }
-
         data.password = encryptedPassword;
-
         const user = await User.create(data);
-
         return res.status(201).json({
             message: "User has been created",
             name: user.name,
@@ -32,7 +21,7 @@ export const register = async (req, res) => {
     }
 };
 
-export const login = async (req, res) => {cx
+export const login = async (req, res) => {
     const { email, username, password } = req.body
     try{
         const user = await User.findOne({
@@ -60,8 +49,7 @@ export const login = async (req, res) => {cx
         return res.status(200).json({
             message: "Login successful",
             userDetails: {
-                token: token,
-                profilePicture: user.profilePicture
+                token: token
             }
         })
     }catch(err){

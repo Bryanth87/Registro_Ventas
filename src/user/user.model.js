@@ -1,13 +1,12 @@
 import { Schema, model} from "mongoose";
 
-const userSchema = new mongoose.Schema({
+const userSchema = Schema({
     name: { 
       type: String, 
       required: true 
     },
     surname:{
       type: String,
-      required: true,
     },
     username:{
       type: String,
@@ -28,12 +27,21 @@ const userSchema = new mongoose.Schema({
       enum: ['ADMIN_ROLE', 'CLIENT_ROLE'], 
       default: 'CLIENT_ROLE' 
     },
-  })
-    
-    userSchema.methods.toJSON = function () {
-      const { password, _id, ...usuario } = this.toObject();
-      usuario.uid = _id;
-      return usuario;
-    };
+    status:{
+        type: Boolean,
+        default: true
+    }
+},
+{
+    versionKey: false,
+    timeStamps: true
+})
+
+userSchema.methods.toJSON = function () {
+    const { password, _id, ...usuario } = this.toObject();
+    usuario.uid = _id;
+    return usuario;
+
+};
 
 export default model ("User", userSchema)

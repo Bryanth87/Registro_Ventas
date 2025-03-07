@@ -7,11 +7,13 @@ import morgan from 'morgan';
 import { dbConnection } from "./mongo.js";
 import apiLimiter from "../src/middlewares/rate-limit-validator.js";
 import authRoutes from "../src/auth/auth.routes.js";
-import userRoutes from "../src/user/user.routes.js"
+import userRoutes from "../src/user/user.routes.js";
+import { swaggerDocs, swaggerUi } from "./swagger.js"; 
 
 const routes = (app) => {
-    app.use("/store/v1/auth", authRoutes); 
-    app.use("/store/v1/user", userRoutes)
+    app.use("/coperex/v1/auth", authRoutes); 
+    app.use("/coperex/v1/users", userRoutes);
+    app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs)); // Montar Swagger
 };
 
 const middlewares = (app) => {
@@ -41,6 +43,7 @@ export const initServer = () => {
         const port = process.env.PORT || 3001;
         app.listen(port, () => {
             console.log(`Server running on port ${port} matutina`);
+            console.log(`Documentación de la API en http://localhost:${port}/api-docs`);
         });
     } catch (err) {
         console.log(`Server init failed: ${err}`);
