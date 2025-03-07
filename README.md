@@ -27,13 +27,15 @@ API de gestión de ventas
     ```cmd
     npm run dev
 
-# «ADMIN» Las credenciasles del Admin son: 
+# Las credenciasles del Admin son: 
  - **Cuerpo:**
     ```json
     {
+    
     "username":"Bryanth87",
     "email":"Bryanth87@gmail.com",
     "password":"Brayan1234"
+    
     }
 
 
