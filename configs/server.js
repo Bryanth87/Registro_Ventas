@@ -8,7 +8,7 @@ import { dbConnection } from "./mongo.js";
 import apiLimiter from "../src/middlewares/rate-limit-validator.js";
 import authRoutes from "../src/auth/auth.routes.js";
 import userRoutes from "../src/user/user.routes.js";
-import { swaggerDocs, swaggerUi } from "./swagger.js"; 
+import { swaggerDocs, swaggerUi } from "./swagger.js"; // Importar Swagger
 
 const routes = (app) => {
     app.use("/coperex/v1/auth", authRoutes); 
