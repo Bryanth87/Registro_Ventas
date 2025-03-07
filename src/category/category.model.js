@@ -1,6 +1,6 @@
 import { Schema, model} from "mongoose";
 
-const categorySchema = new mongoose.Schema({
+const categorySchema = new Schema({
     name: { 
       type: String, 
       required: true 
@@ -9,10 +9,20 @@ const categorySchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    calidad: {
-        type: String,
-        enum: ["Bueno", "Malo"]
-      }  
-    })
+    status: {
+      type: Boolean,
+      default: true
+  }
+},
+{
+  versionKey: false,
+  timeStamps: true
+})
+
+categorySchema.methods.toJSON = function(){
+  const {_id, ...category} = this.toObject()
+  category.uid = _id
+  return category
+}
     
 export default model ("Category", categorySchema)

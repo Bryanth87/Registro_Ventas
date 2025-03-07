@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "6d438182-2493-4be2-b148-b96946240195",
+		"_postman_id": "7ba4582c-c629-4bf7-bebb-4a6f309bfe22",
 		"name": "Coperex",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "42058393"
@@ -148,7 +148,10 @@
 			"name": "editAdmin",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": ""
+				}
 			},
 			"response": []
 		},
@@ -156,7 +159,10 @@
 			"name": "deleteAdmin",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": ""
+				}
 			},
 			"response": []
 		},
@@ -168,7 +174,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2NhMmM2YmZiOThiMDgyZDk4NGQ5ZWEiLCJpYXQiOjE3NDEzMDUzMzAsImV4cCI6MTc0MTMwODkzMH0.d9pSnbpjPljHHwcEcbXKXH3trPZFWu30xV_zAEDAKTc",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2NhMmM0YmZiOThiMDgyZDk4NGQ5ZTYiLCJpYXQiOjE3NDEzMzAwMzQsImV4cCI6MTc0MTMzMzYzNH0.vmuYq9CiaQIuL4fC-S_QR6mp256tylkHZdCmmmKRWu0",
 							"type": "string"
 						}
 					]
@@ -177,7 +183,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Esteban Cortejo\",\r\n    \"username\": \"estebancortejo11\",\r\n    \"email\": \"estebancortejo11@gmail.com\"\r\n}",
+					"raw": "{\r\n    \"name\": \"Omar Molina\",\r\n    \"username\": \"omarmolina11\",\r\n    \"email\": \"omarmartinez@gmail.com\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -276,8 +282,41 @@
 		{
 			"name": "deleteProfile",
 			"request": {
-				"method": "GET",
-				"header": []
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2NhMmM0YmZiOThiMDgyZDk4NGQ5ZTYiLCJpYXQiOjE3NDEzMzAwMzQsImV4cCI6MTc0MTMzMzYzNH0.vmuYq9CiaQIuL4fC-S_QR6mp256tylkHZdCmmmKRWu0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"password\": \"Password123!\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/coperex/v1/users/deleteprofile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"coperex",
+						"v1",
+						"users",
+						"deleteprofile"
+					]
+				}
 			},
 			"response": []
 		}
