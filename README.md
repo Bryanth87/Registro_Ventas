@@ -3,6 +3,12 @@ API de gestión de ventas
 ## Hecho por: Bryanth87
 ## email: tgbryan14@gmail.com
 
+# Requisitos para iniciar el proyecto
+
+- *[Git](https://git-scm.com/)*
+- *[Node.js](https://nodejs.org/)*
+- *[npm](https://www.npmjs.com/)*
+
 # Importar proyecto
 
 1. **Crea una carpeta local** (donde quieras almacenar el proyecto)
@@ -41,10 +47,4 @@ API de gestión de ventas
  - **Uso en postman:**
 ** Al momento de ejecutar el proyecto, ir a un navegador web y colocar esta url: "http://localhost:3001/api-docs/"
 
-# Uso de endopoints 
-## 🚀 PRERREQUISITOS 🚀
-
-- *[Git](https://git-scm.com/)*
-- *[Node.js](https://nodejs.org/)*
-- *[npm](https://www.npmjs.com/)*
 
