@@ -160,3 +160,47 @@ export const findByIdProduct = async (req, res) => {
         });
     }
 };
+
+export const increaseProduct = async (req, res) => {
+    try {
+        const { uid } = req.params;
+        const { amount } = req.body;
+        const product = await Product.findByIdAndUpdate(uid, { $inc: { stock: amount } }, { new: true });
+        if (!product) {
+            return res.status(404).json({
+                message: "No se encuentra este producto"
+            })
+        }
+        return res.status(200).json({
+            message: "Producto agregado correctamente",
+            product
+        })
+    } catch (err) {
+        return res.status(500).json({
+            message: "Error al incrementar el producto",
+            error: err.message
+        })
+    }
+}
+
+export const decreaseProduct = async (req, res) => {
+    try {
+        const { uid } = req.params;
+        const { amount } = req.body;
+        const product = await Product.findByIdAndUpdate(uid, { $inc: { stock: -amount } }, { new: true });
+        if (!product) {
+            return res.status(404).json({
+                message: "Este producto no se encuentra"
+            })
+        }
+        return res.status(200).json({
+            message: "Producto eliminado correctamente",
+            product
+        })
+    } catch (err) {
+        return res.status(500).json({
+            message: "Error al eliminar el producto",
+            error: err.message
+        })
+    }
+}

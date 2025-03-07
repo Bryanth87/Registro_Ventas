@@ -49,7 +49,7 @@ export const deleteProductValidator = [
 
 export const findProductByNameValidator = [
     validateJWT,
-    hasRoles("ADMIN_ROLE"),
+    hasRoles("CLIENT_ROLE", "ADMIN_ROLE"),
     param("name").notEmpty().withMessage("El nombre del producto es obligatorio"),
     validarCampos,
     handleErrors
@@ -57,10 +57,26 @@ export const findProductByNameValidator = [
 
 export const findByIdProductValidator = [
     validateJWT,
-    hasRoles("ADMIN_ROLE"),
+    hasRoles("CLIENT_ROLE", "ADMIN_ROLE"),
     param("categoryId").notEmpty().withMessage("El ID de la categoría es obligatorio")
         .isMongoId().withMessage("El ID de la categoría debe ser un ID válido de MongoDB")
         .custom(categoryExists),
+    validarCampos,
+    handleErrors
+];
+
+export const increaseProductValidator = [
+    validateJWT,
+    hasRoles("ADMIN_ROLE"),
+    body("amount").notEmpty().withMessage("La cantidad es requerida"),
+    validarCampos,
+    handleErrors
+];
+
+export const decreaseProductValidator = [
+    validateJWT,
+    hasRoles("ADMIN_ROLE"),
+    body("amount").notEmpty().withMessage("La cantidad es requerida"),
     validarCampos,
     handleErrors
 ];
