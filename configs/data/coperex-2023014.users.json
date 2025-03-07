@@ -1,0 +1,88 @@
+[{
+  "_id": {
+    "$oid": "67ca2c14e7458323ae1f0261"
+  },
+  "name": "Bryan",
+  "username": "Bryanth87",
+  "email": "Bryanth87@gmail.com",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$+xh/kPh2nTJu0hsNVVWRqQ$luNekwTdwWGs/I6FnHxj9IHX1M0v7UvH8pwiq1nzmZc",
+  "role": "ADMIN_ROLE",
+  "status": true
+},
+{
+  "_id": {
+    "$oid": "67ca2c4bfb98b082d984d9e6"
+  },
+  "name": "Omar Molina",
+  "username": "omarmolina11",
+  "email": "omarmartinez@gmail.com",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$MRK2ZokvVLQRgPCqKoPAIA$Sk5O6QSPe5BxrxJiec+rk/DHb6Er+Dpyp6Ay/8LH8W4",
+  "role": "CLIENT_ROLE",
+  "status": false
+},
+{
+  "_id": {
+    "$oid": "67ca2c6bfb98b082d984d9ea"
+  },
+  "name": "Esteban Cortejo",
+  "username": "estebancortejo11",
+  "email": "estebancortejo11@gmail.com",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$lrnl4FPUh39MikaEVkUX+w$TzCQnTE+4wJMDVGmQAJN2Da/31W5Js63l5tsXMFy1NY",
+  "role": "ADMIN_ROLE",
+  "status": false
+},
+{
+  "_id": {
+    "$oid": "67ca2d49e9d9992eab19fccc"
+  },
+  "name": "Mateo Guzman",
+  "username": "johngarcia16",
+  "email": "mateoguzman11@example.com",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$P1EbXTcS9aDXbPDVYitdZA$o2d5r476qc49pLxU1ElJPRLxENYuLOKxrfLI77/B5+8",
+  "role": "CLIENT_ROLE",
+  "status": false
+},
+{
+  "_id": {
+    "$oid": "67cb7756f557ecebe408408f"
+  },
+  "name": "Mateo GGuzman",
+  "username": "marcolopez15",
+  "email": "mateoguzman112@example.com",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$M84R8RXzILHhI0UZG4180A$N6fSvDKE1e3wR47H2HgLT2q3nHvBkac3Z7m3SHJ3Y0Q",
+  "role": "ADMIN_ROLE",
+  "status": false
+},
+{
+  "_id": {
+    "$oid": "67cb7881f557ecebe40840a4"
+  },
+  "name": "Marco LLópez",
+  "username": "marcol3opez15",
+  "email": "marcolopez2@gmail.com",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$Te+rNHHTeQhZEPOtFUks1A$36c7+NyEq2Jpxekl7YsIMYdJEuLJlLHDX7Va3RDVxWQ",
+  "role": "CLIENT_ROLE",
+  "status": false
+},
+{
+  "_id": {
+    "$oid": "67cb79aff557ecebe40840ad"
+  },
+  "name": "John Ga3cia",
+  "username": "johngarc3ia16",
+  "email": "johngarcia16@fexample.com",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$/SR9K6nW7ob59FffIAbXaw$KQ74rHcMH+v/3eDwv6Ccl1e29huqPImBupMFn6Kx0TM",
+  "role": "CLIENT_ROLE",
+  "status": true
+},
+{
+  "_id": {
+    "$oid": "67cb79c3f557ecebe40840b1"
+  },
+  "name": "Mateo GGuzfman",
+  "username": "mateo12",
+  "email": "mateoguzman112@exasmple.com",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$gJPoHXWbUosEI6okuYKFfA$6TamYiHJzUc2ci139hj1XzZt6s3Y1Ru5IXPQ5e99ef4",
+  "role": "CLIENT_ROLE",
+  "status": true
+}]

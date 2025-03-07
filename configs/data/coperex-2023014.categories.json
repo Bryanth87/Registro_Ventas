@@ -1,0 +1,32 @@
+[{
+  "_id": {
+    "$oid": "67caac0a3d8e6e2b7a093304"
+  },
+  "name": "Default",
+  "description": "Default category",
+  "status": true
+},
+{
+  "_id": {
+    "$oid": "67caac733d8e6e2b7a09330a"
+  },
+  "name": "Electrodomésticos",
+  "description": "Productos electrodomésticos",
+  "status": false
+},
+{
+  "_id": {
+    "$oid": "67caacb9500ff5fb2f31f2a7"
+  },
+  "name": "Electrónica",
+  "description": "Productos electrónicos",
+  "status": true
+},
+{
+  "_id": {
+    "$oid": "67caad4a46a4009de390b695"
+  },
+  "name": "Electrónica",
+  "description": "Productos electrónicos",
+  "status": true
+}]

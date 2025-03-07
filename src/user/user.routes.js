@@ -1,178 +1,126 @@
-import User from "./user.model.js"
-import { hash, verify } from "argon2"
+import express from "express";
+import { addUser, editProfileAdmin, editRoleAdmin, editProfile, editPassword, deleteUserAdmin, deleteProfile } from "../user/user.controller.js";
+import { addUserValidator, editAdminUserValidator, editRoleAdminValidator, deleteProfileAdminValidator, editProfileValidator, editPasswordValidator, deleteProfileValidator } from "../middlewares/user-validators.js"; 
 
-export const addUser = async (req, res) => {
-    try {
-        const data = req.body;
-        const encryptedPassword = await hash(data.password)
-        data.password = encryptedPassword;
+const router = express.Router();
 
-        const user = await User.create(data);
+/**
+ * @swagger
+ * /coperex/v1/users/adduser:
+ *   post:
+ *     summary: Añadir un nuevo usuario
+ *     responses:
+ *       200:
+ *         description: Usuario añadido exitosamente
+ */
+router.post("/adduser", 
+    addUserValidator, 
+    addUser
+);
 
-        return res.status(201).json({
-            message: "Usuario creado",
-            name: user.name,
-            email: user.email
-        });
-        
-        
-    } catch (err) {
-        return res.status(500).json({
-            message: "Error al crear usuario",
-            error: err.message
-        });
-    }
-}
+/**
+ * @swagger
+ * /coperex/v1/users/edituser/{uid}:
+ *   put:
+ *     summary: Editar un usuario existente
+ *     parameters:
+ *       - in: path
+ *         name: uid
+ *         required: true
+ *         description: ID del usuario
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Usuario editado exitosamente
+ */
+router.put("/edituser/:uid",
+    editAdminUserValidator, 
+    editProfileAdmin
+);
 
-export const editProfileAdmin = async (req, res) => {
-    try {
-        const { uid } = req.params;
-        const data = req.body;
+/**
+ * @swagger
+ * /coperex/v1/users/editrole/{uid}:
+ *   patch:
+ *     summary: Editar el rol de un usuario
+ *     parameters:
+ *       - in: path
+ *         name: uid
+ *         required: true
+ *         description: ID del usuario
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Rol del usuario editado exitosamente
+ */
+router.patch("/editrole/:uid", 
+    editRoleAdminValidator, 
+    editRoleAdmin
+);
 
-        const user = await User.findByIdAndUpdate(uid, data,{ new: true });
+/**
+ * @swagger
+ * /coperex/v1/users/deleteuser/{uid}:
+ *   delete:
+ *     summary: Eliminar un usuario
+ *     parameters:
+ *       - in: path
+ *         name: uid
+ *         required: true
+ *         description: ID del usuario
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Usuario eliminado exitosamente
+ */
+router.delete("/deleteuser/:uid", 
+    deleteProfileAdminValidator, 
+    deleteUserAdmin
+);
 
-        return res.status(200).json({
-            message: "Usuario actualizado",
-            user
-        });
-    } catch (err) {
-        return res.status(500).json({
-            message: "Error al actualizar el usuario",
-            error: err.message
-        });
-    }
-}
+/**
+ * @swagger
+ * /coperex/v1/users/editprofile:
+ *   put:
+ *     summary: Editar el perfil del usuario
+ *     responses:
+ *       200:
+ *         description: Perfil editado exitosamente
+ */
+router.put("/editprofile", 
+    editProfileValidator, 
+    editProfile
+);
 
-export const editRoleAdmin = async (req, res) => {
-    try {
-        const { uid } = req.params;
-        const { role } = req.body;
+/**
+ * @swagger
+ * /coperex/v1/users/editpassword:
+ *   patch:
+ *     summary: Editar la contraseña del usuario
+ *     responses:
+ *       200:
+ *         description: Contraseña editada exitosamente
+ */
+router.patch("/editpassword", 
+    editPasswordValidator, 
+    editPassword
+);
 
-        const user = await User.findByIdAndUpdate(uid, { role }, { new: true });
+/**
+ * @swagger
+ * /coperex/v1/users/deleteprofile:
+ *   delete:
+ *     summary: Eliminar el perfil del usuario
+ *     responses:
+ *       200:
+ *         description: Perfil eliminado exitosamente
+ */
+router.delete("/deleteprofile", 
+    deleteProfileValidator, 
+    deleteProfile
+);
 
-        return res.status(200).json({
-            message: "El usuario se convirtió en Admin",
-            user
-        });
-        
-    } catch (err) {
-        return res.status(500).json({
-            message: "Error al actualizar el rol del usuario",
-            error: err.message
-        });
-    }
-}
-
-export const editProfile = async (req, res) => {
-    try {
-        const { usuario } = req;
-        const data = req.body;
-        delete data.password;
-        delete data.role;
-        delete data.status;
-        
-        const user = await User.findByIdAndUpdate(usuario._id,  data, { new: true });
-
-        return res.status(200).json({
-            message: "Perfil actualizado",
-            user
-        });
-    } catch (err) {
-        return res.status(500).json({
-            message: "Error al actualizar perfil",
-            error: err.message
-        });
-    }
-}
-
-
-export const editPassword = async (req, res) => {
-    try {
-        const { usuario } = req;
-        const { newPassword } = req.body;
-
-        const user = await User.findById(usuario._id);
-
-        const matchOldAndNewPassword = await verify(user.password, newPassword);
-
-        if (matchOldAndNewPassword) {
-            return res.status(400).json({
-                success: false,
-                message: "La nueva contraseña no puede ser igual a la anterior"
-            });
-        }
-
-        const encryptedPassword = await hash(newPassword);
-
-        await User.findByIdAndUpdate(usuario._id, { password: encryptedPassword }, { new: true });
-
-        return res.status(200).json({
-            success: true,
-            message: "Contraseña actualizada",
-        });
-    } catch (err) {
-        console.log(err)
-        return res.status(500).json({
-            
-            success: false,
-            message: "Error al actualizar la contraseña",
-            error: err.message
-        });
-    }
-};
-
-export const deleteUserAdmin = async (req, res) => {
-    try {
-        const { uid } = req.params;
-
-        const user = await User.findByIdAndUpdate(uid, { status: false }, { new: true });
-
-        return res.status(200).json({
-            message: "Usuario eliminado",
-            user
-        });
-    } catch (err) {
-        return res.status(500).json({
-            message: "Error al eliminar el usuario",
-            error: err.message
-        });
-    }
-}
-
-
-export const deleteProfile = async (req, res) => {
-    try{
-        const { usuario } = req;
-        const { password } = req.body;
-
-        if(!password){
-            return res.status(400).json({
-                success: false,
-                message: "La contraseña es requerida para eliminar tu perfil"
-            });
-        }
-
-        const matchPasswords = await verify(usuario.password, password);
-
-        if (!matchPasswords) {
-            return res.status(400).json({
-                success: false,
-                message: "Contraseña incorrecta"
-            });
-        }
-       
-        await User.findByIdAndUpdate(usuario._id, { status: false }, { new: true });
-
-
-        return res.status(200).json({
-            succes: true,
-            message: "Perfil eliminado",
-        });
-    } catch (err) {
-        console.log(err)
-        return res.status(500).json({
-            message: "Error al eliminar perfil",
-            error: err.message
-        });
-    }
-}
+export default router;

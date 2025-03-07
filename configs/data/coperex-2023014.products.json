@@ -1,0 +1,40 @@
+[{
+  "_id": {
+    "$oid": "67cb74933c34e69de2d7e940"
+  },
+  "nameProduct": "Laptop-Middle",
+  "descriptionProduct": "Laptop de alta gama",
+  "priceProduct": 1500,
+  "stock": 10,
+  "sold": 0,
+  "category": {
+    "$oid": "60c72b2f9b1d8b3a4c8e4d3b"
+  },
+  "status": true,
+  "createdAt": {
+    "$date": "2025-03-07T22:34:59.446Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-07T22:43:48.103Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67cb74e83c34e69de2d7e947"
+  },
+  "nameProduct": "Laptop-Fortnite",
+  "descriptionProduct": "Laptop de alta gama",
+  "priceProduct": 1500,
+  "stock": 10,
+  "sold": 0,
+  "category": {
+    "$oid": "67caac0a3d8e6e2b7a093304"
+  },
+  "status": false,
+  "createdAt": {
+    "$date": "2025-03-07T22:36:24.715Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-07T23:17:36.052Z"
+  }
+}]

@@ -1,6 +1,6 @@
 import express from "express";
-import { addProduct, listProduct, editProduct, deleteProduct, listOutProduct, listMoreSoldProduct, findProductByName, findByIdProduct } from "./product.controller.js";
-import { addProductValidator, editProductValidator, deleteProductValidator, findProductByNameValidator, findByIdProductValidator } from "../middlewares/product-validators.js";
+import { addProduct, listProduct, editProduct, deleteProduct, listOutProduct, listMoreSoldProduct, findProductByName, findByIdProduct, increaseProduct, decreaseProduct } from "./product.controller.js";
+import { addProductValidator, editProductValidator, deleteProductValidator, findProductByNameValidator, findByIdProductValidator, increaseProductValidator, decreaseProductValidator } from "../middlewares/product-validators.js";
 
 const router = express.Router();
 
@@ -358,5 +358,81 @@ router.get("/findbycategory/:categoryId",
     findByIdProductValidator, 
     findByIdProduct
 );
+
+// ...existing code...
+
+/**
+ * @swagger
+ * /coperex/v1/products/increaseproduct/{uid}:
+ *   put:
+ *     summary: Incrementar la cantidad de un producto
+ *     tags: [Product]
+ *     parameters:
+ *       - in: path
+ *         name: uid
+ *         required: true
+ *         description: ID del producto
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               amount:
+ *                 type: number
+ *                 example: 5
+ *     responses:
+ *       200:
+ *         description: Producto incrementado correctamente
+ *       404:
+ *         description: Producto no encontrado
+ *       500:
+ *         description: Error del servidor
+ */
+router.patch("/increaseproduct/:uid",
+    increaseProductValidator, 
+    increaseProduct
+);
+
+/**
+ * @swagger
+ * /coperex/v1/products/decreaseproduct/{uid}:
+ *   put:
+ *     summary: Disminuir la cantidad de un producto
+ *     tags: [Product]
+ *     parameters:
+ *       - in: path
+ *         name: uid
+ *         required: true
+ *         description: ID del producto
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               amount:
+ *                 type: number
+ *                 example: 5
+ *     responses:
+ *       200:
+ *         description: Producto disminuido correctamente
+ *       404:
+ *         description: Producto no encontrado
+ *       500:
+ *         description: Error del servidor
+ */
+router.patch("/decreaseproduct/:uid", 
+    decreaseProductValidator,
+    decreaseProduct
+);
+
+// ...existing code...
 
 export default router;

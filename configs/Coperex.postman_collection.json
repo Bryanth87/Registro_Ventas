@@ -47,7 +47,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"Marco López\",\r\n  \"username\": \"marcolopez15\",\r\n  \"email\": \"marcolopez@gmail.com\",\r\n  \"password\": \"Password123!\"\r\n}",
+							"raw": "{\r\n  \"name\": \"Marco L2ópez\",\r\n  \"username\": \"marcolope1z15\",\r\n  \"email\": \"marcolopez@g1mail.com\",\r\n  \"password\": \"Password123!\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -73,15 +73,22 @@
 				},
 				{
 					"name": "registrarAdmin",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
-						"method": "GET",
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2NhMmMxNGU3NDU4MzIzYWUxZjAyNjEiLCJpYXQiOjE3NDEzODY4ODYsImV4cCI6MTc0MTM5MDQ4Nn0.FvDZ7tlNLqKwgXEqSXLhSE2Qxj2PebTKqTRWqkO-fJ0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"John Garcia\",\r\n    \"username\": \"johngarcia16\",\r\n    \"email\": \"johngarcia16@example.com\",\r\n    \"password\": \"Password123!\",\r\n    \"role\": \"CLIENT_ROLE\"\r\n}",
+							"raw": "{\r\n    \"name\": \"John Ga3cia\",\r\n    \"username\": \"johngarc3ia16\",\r\n    \"email\": \"johngarcia16@fexample.com\",\r\n    \"password\": \"Password123!\",\r\n    \"role\": \"CLIENT_ROLE\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -89,7 +96,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3001/coperex/v1/users/users",
+							"raw": "http://localhost:3001/coperex/v1/users/adduser",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -99,7 +106,7 @@
 								"coperex",
 								"v1",
 								"users",
-								"users"
+								"adduser"
 							]
 						}
 					},
@@ -108,10 +115,41 @@
 				{
 					"name": "editAdmin",
 					"request": {
-						"method": "GET",
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2NhMmMxNGU3NDU4MzIzYWUxZjAyNjEiLCJpYXQiOjE3NDEzODY4ODYsImV4cCI6MTc0MTM5MDQ4Nn0.FvDZ7tlNLqKwgXEqSXLhSE2Qxj2PebTKqTRWqkO-fJ0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Mateo GGuzfman\",\r\n    \"username\": \"mateo12\",\r\n    \"email\": \"mateoguzman112@exasmple.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": ""
+							"raw": "http://localhost:3001/coperex/v1/users/edituser/67cb79c3f557ecebe40840b1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"coperex",
+								"v1",
+								"users",
+								"edituser",
+								"67cb79c3f557ecebe40840b1"
+							]
 						}
 					},
 					"response": []
@@ -119,10 +157,41 @@
 				{
 					"name": "deleteAdmin",
 					"request": {
-						"method": "GET",
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2NhMmMxNGU3NDU4MzIzYWUxZjAyNjEiLCJpYXQiOjE3NDEzODY4ODYsImV4cCI6MTc0MTM5MDQ4Nn0.FvDZ7tlNLqKwgXEqSXLhSE2Qxj2PebTKqTRWqkO-fJ0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": ""
+							"raw": "http://localhost:3001/coperex/v1/users/deleteuser/67cb7881f557ecebe40840a4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"coperex",
+								"v1",
+								"users",
+								"deleteuser",
+								"67cb7881f557ecebe40840a4"
+							]
 						}
 					},
 					"response": []
@@ -175,7 +244,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"mateoguzman11@example.com\",\r\n    \"password\": \"\"\r\n}",
+							"raw": "{\r\n    \"email\": \"mateoguzman112@example.com\",\r\n    \"password\": \"Password123!\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -207,7 +276,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2NhMmM0YmZiOThiMDgyZDk4NGQ5ZTYiLCJpYXQiOjE3NDEzMzAwMzQsImV4cCI6MTc0MTMzMzYzNH0.vmuYq9CiaQIuL4fC-S_QR6mp256tylkHZdCmmmKRWu0",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2NiNzc1NmY1NTdlY2ViZTQwODQwOGYiLCJpYXQiOjE3NDEzODc3ODcsImV4cCI6MTc0MTM5MTM4N30.jQtz-oaOk7R8ggYfuVQd4hqKbbkXeGuB2dM57JcqFlk",
 									"type": "string"
 								}
 							]
@@ -216,7 +285,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"password\": \"Password123!\"\r\n}",
+							"raw": "{\r\n    \"password\": \"newPassword123!\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -241,48 +310,6 @@
 					"response": []
 				},
 				{
-					"name": "editRole",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2NhMmMxNGU3NDU4MzIzYWUxZjAyNjEiLCJpYXQiOjE3NDEzMDMwOTYsImV4cCI6MTc0MTMwNjY5Nn0.7M4f7GRRFpf6QXZwwLv8r7B8QqfP0PEgaBylGcspGDc",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PATCH",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"role\": \"ADMIN_ROLE\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3001/coperex/v1/users/editrole/67ca2c6bfb98b082d984d9ea",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3001",
-							"path": [
-								"coperex",
-								"v1",
-								"users",
-								"editrole",
-								"67ca2c6bfb98b082d984d9ea"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "editPassword",
 					"request": {
 						"auth": {
@@ -290,7 +317,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2NhMmM2YmZiOThiMDgyZDk4NGQ5ZWEiLCJpYXQiOjE3NDEzMTE0ODQsImV4cCI6MTc0MTMxNTA4NH0.8YU-oQc_QZXkCKtexHA_jtzQIgvAn7I06xE4FxiqUXs",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2NiNzc1NmY1NTdlY2ViZTQwODQwOGYiLCJpYXQiOjE3NDEzODc3ODcsImV4cCI6MTc0MTM5MTM4N30.jQtz-oaOk7R8ggYfuVQd4hqKbbkXeGuB2dM57JcqFlk",
 									"type": "string"
 								}
 							]
@@ -322,6 +349,48 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "editRole",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2NhMmMxNGU3NDU4MzIzYWUxZjAyNjEiLCJpYXQiOjE3NDEzODY4ODYsImV4cCI6MTc0MTM5MDQ4Nn0.FvDZ7tlNLqKwgXEqSXLhSE2Qxj2PebTKqTRWqkO-fJ0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"role\": \"ADMIN_ROLE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/coperex/v1/users/editrole/67cb7756f557ecebe408408f",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"coperex",
+								"v1",
+								"users",
+								"editrole",
+								"67cb7756f557ecebe408408f"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -331,32 +400,150 @@
 				{
 					"name": "addCategory",
 					"request": {
-						"method": "GET",
-						"header": []
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2NhMmMxNGU3NDU4MzIzYWUxZjAyNjEiLCJpYXQiOjE3NDEzODY4ODYsImV4cCI6MTc0MTM5MDQ4Nn0.FvDZ7tlNLqKwgXEqSXLhSE2Qxj2PebTKqTRWqkO-fJ0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Electrónica\",\r\n    \"description\": \"Productos electrónicos\"\r\n} ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/coperex/v1/category/addcategory",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"coperex",
+								"v1",
+								"category",
+								"addcategory"
+							]
+						}
 					},
 					"response": []
 				},
 				{
 					"name": "listCategory",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/coperex/v1/category/listcategories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"coperex",
+								"v1",
+								"category",
+								"listcategories"
+							]
+						}
 					},
 					"response": []
 				},
 				{
 					"name": "editCategory",
 					"request": {
-						"method": "GET",
-						"header": []
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2NhMmMxNGU3NDU4MzIzYWUxZjAyNjEiLCJpYXQiOjE3NDEzODY4ODYsImV4cCI6MTc0MTM5MDQ4Nn0.FvDZ7tlNLqKwgXEqSXLhSE2Qxj2PebTKqTRWqkO-fJ0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Electrodomésticos\",\r\n    \"description\": \"Productos electrodomésticos\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/coperex/v1/category/editcategory/67caac733d8e6e2b7a09330a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"coperex",
+								"v1",
+								"category",
+								"editcategory",
+								"67caac733d8e6e2b7a09330a"
+							]
+						}
 					},
 					"response": []
 				},
 				{
 					"name": "deleteCategory",
 					"request": {
-						"method": "GET",
-						"header": []
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2NhMmMxNGU3NDU4MzIzYWUxZjAyNjEiLCJpYXQiOjE3NDEzODY4ODYsImV4cCI6MTc0MTM5MDQ4Nn0.FvDZ7tlNLqKwgXEqSXLhSE2Qxj2PebTKqTRWqkO-fJ0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/coperex/v1/category/deletecategory/67caac733d8e6e2b7a09330a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"coperex",
+								"v1",
+								"category",
+								"deletecategory",
+								"67caac733d8e6e2b7a09330a"
+							]
+						}
 					},
 					"response": []
 				}
@@ -364,7 +551,253 @@
 		},
 		{
 			"name": "product",
-			"item": []
+			"item": [
+				{
+					"name": "addProduct",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2NhMmMxNGU3NDU4MzIzYWUxZjAyNjEiLCJpYXQiOjE3NDEzODY4ODYsImV4cCI6MTc0MTM5MDQ4Nn0.FvDZ7tlNLqKwgXEqSXLhSE2Qxj2PebTKqTRWqkO-fJ0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nameProduct\": \"Laptop-Fortnite\",\r\n  \"descriptionProduct\": \"Laptop de alta gama\",\r\n  \"priceProduct\": 1500,\r\n  \"stock\": 10,\r\n  \"category\": \"67caac733d8e6e2b7a09330a\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/coperex/v1/product/addproduct",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"coperex",
+								"v1",
+								"product",
+								"addproduct"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listProducts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/coperex/v1/product/listproducts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"coperex",
+								"v1",
+								"product",
+								"listproducts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listProduct",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/coperex/v1/product/findbyid/67cb74933c34e69de2d7e940",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"coperex",
+								"v1",
+								"product",
+								"findbyid",
+								"67cb74933c34e69de2d7e940"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "editProduct",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2NhMmMxNGU3NDU4MzIzYWUxZjAyNjEiLCJpYXQiOjE3NDEzODY4ODYsImV4cCI6MTc0MTM5MDQ4Nn0.FvDZ7tlNLqKwgXEqSXLhSE2Qxj2PebTKqTRWqkO-fJ0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nameProduct\": \"Laptop-Middle\",\r\n  \"descriptionProduct\": \"Laptop de alta gama\",\r\n  \"priceProduct\": 1500,\r\n  \"stock\": 10,\r\n  \"category\": \"60c72b2f9b1d8b3a4c8e4d3b\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/coperex/v1/product/editproduct/67cb74933c34e69de2d7e940",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"coperex",
+								"v1",
+								"product",
+								"editproduct",
+								"67cb74933c34e69de2d7e940"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteProduct",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2NhMmMxNGU3NDU4MzIzYWUxZjAyNjEiLCJpYXQiOjE3NDEzODY4ODYsImV4cCI6MTc0MTM5MDQ4Nn0.FvDZ7tlNLqKwgXEqSXLhSE2Qxj2PebTKqTRWqkO-fJ0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/coperex/v1/product/deleteproduct/67cb74e83c34e69de2d7e947",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"coperex",
+								"v1",
+								"product",
+								"deleteproduct",
+								"67cb74e83c34e69de2d7e947"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "incrementProduct",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2NhMmMxNGU3NDU4MzIzYWUxZjAyNjEiLCJpYXQiOjE3NDEzODY4ODYsImV4cCI6MTc0MTM5MDQ4Nn0.FvDZ7tlNLqKwgXEqSXLhSE2Qxj2PebTKqTRWqkO-fJ0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"amount\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/coperex/v1/product/increaseproduct/67cb74933c34e69de2d7e940",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"coperex",
+								"v1",
+								"product",
+								"increaseproduct",
+								"67cb74933c34e69de2d7e940"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "decrementProduct",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2NhMmMxNGU3NDU4MzIzYWUxZjAyNjEiLCJpYXQiOjE3NDEzODY4ODYsImV4cCI6MTc0MTM5MDQ4Nn0.FvDZ7tlNLqKwgXEqSXLhSE2Qxj2PebTKqTRWqkO-fJ0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"amount\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/coperex/v1/product/decreaseproduct/67cb74933c34e69de2d7e940",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"coperex",
+								"v1",
+								"product",
+								"decreaseproduct",
+								"67cb74933c34e69de2d7e940"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
