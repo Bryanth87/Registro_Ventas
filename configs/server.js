@@ -9,12 +9,14 @@ import apiLimiter from "../src/middlewares/rate-limit-validator.js";
 import authRoutes from "../src/auth/auth.routes.js";
 import userRoutes from "../src/user/user.routes.js";
 import categoryRoutes from "../src/category/category.routes.js";
+import productRoutes from "../src/product/product.routes.js";
 import { swaggerDocs, swaggerUi } from "./swagger.js"; 
 
 const routes = (app) => {
     app.use("/coperex/v1/auth", authRoutes); 
     app.use("/coperex/v1/users", userRoutes);
-    app.use("/coperex/v1/category", categoryRoutes)
+    app.use("/coperex/v1/category", categoryRoutes);
+    app.use("/coperex/v1/product", productRoutes);
     app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs)); 
 };
 
